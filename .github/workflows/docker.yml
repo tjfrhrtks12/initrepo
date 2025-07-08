@@ -2,7 +2,7 @@ name: Deploy to EC2 via ECR
 
 on:
   push:
-    branches: [main]
+    branches: [dev]
 
 jobs:
   deploy:
@@ -57,7 +57,7 @@ jobs:
           aws_secret_access_key = ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           region = ${{ secrets.AWS_REGION }}
           EOF
-          
+         
           echo "Logging into ECR..."
           aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ steps.login-ecr.outputs.registry }}
           echo "Pulling image: $IMAGE"
